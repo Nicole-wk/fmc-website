@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Rutger Wijburg — Industry Advisor — FMC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body { background: var(--bg-white); }
+    .advisor-profile-hero {
+      padding: calc(var(--nav-h) + 60px) 0 60px;
+      background: var(--bg-off-white);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .advisor-profile-inner {
+      display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: start;
+    }
+    .advisor-profile-avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--green-tint); border: 2px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-deep); flex-shrink: 0;
+    }
+    .advisor-profile-meta .back-link {
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-bottom: 16px; transition: color 0.15s;
+    }
+    .advisor-profile-meta .back-link:hover { color: var(--green-deep); }
+    .advisor-profile-meta .eyebrow { display: block; margin-bottom: 8px; }
+    .advisor-profile-meta h1 {
+      font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+      color: var(--text-dark); letter-spacing: -0.022em; margin-bottom: 6px;
+    }
+    .advisor-profile-meta .adv-role-label {
+      font-size: 14px; color: var(--green-deep); font-weight: 600; margin-bottom: 4px; display: block;
+    }
+    .advisor-profile-meta .adv-background {
+      font-size: 14px; color: var(--text-mid); margin-bottom: 20px;
+    }
+    .advisor-profile-meta .profile-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .profile-linkedin-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 600; color: #fff;
+      background: #0077b5; border-radius: 7px; padding: 9px 18px;
+      transition: background 0.2s;
+    }
+    .profile-linkedin-btn:hover { background: #005f91; }
+    .advisor-body { padding: 72px 0; background: var(--bg-white); }
+    .advisor-body-grid { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; }
+    .advisor-bio h2 { font-size: 22px; font-weight: 800; color: var(--text-dark); margin-bottom: 18px; }
+    .advisor-bio p { font-size: 15px; color: var(--text-body); line-height: 1.75; margin-bottom: 16px; }
+    .advisor-sidebar-card {
+      background: var(--bg-off-white); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+    }
+    .advisor-sidebar-card h4 { font-size: 12px; font-weight: 700; color: var(--green-deep); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .advisor-sidebar-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+    @media (max-width: 768px) {
+      .advisor-profile-inner { grid-template-columns: 1fr; }
+      .advisor-body-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="../index.html" class="logo"><img src="../img/fmc-logo.png" alt="FMC" height="34"></a>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li class="nav-item"><a href="../technology.html" class="nav-link">Technology</a></li>
+        <li class="nav-item"><a href="../index.html#applications" class="nav-link">Applications</a></li>
+        <li class="nav-item"><a href="../news.html" class="nav-link">News &amp; Insights</a></li>
+        <li class="nav-item"><a href="../about.html" class="nav-link nav-active">About FMC</a></li>
+        <li class="nav-item"><a href="../careers.html" class="nav-link">Careers</a></li>
+        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="../contact.html" class="btn btn-primary" style="padding:9px 20px;font-size:13px;">Schedule a Briefing →</a>
+      </div>
+    </nav>
+    <button class="mobile-toggle" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="advisor-profile-hero">
+  <div class="container">
+    <div class="advisor-profile-inner">
+      <div class="advisor-profile-avatar">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="advisor-profile-meta">
+        <a href="../about.html#advisors" class="back-link">← Back to Industry Advisors</a>
+        <span class="eyebrow">Industry Advisor</span>
+        <h1>Dr. Rutger Wijburg</h1>
+        <span class="adv-role-label">Semiconductor Advisor</span>
+        <p class="adv-background">Ex COO at Infineon Technologies</p>
+        <div class="profile-links">
+          <!-- LINKEDIN: Replace the href below with Dr. Rutger Wijburg's LinkedIn profile URL -->
+          <a href="https://www.linkedin.com/in/RUTGER-WIJBURG-LINKEDIN-URL" target="_blank" rel="noopener" class="profile-linkedin-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            View LinkedIn Profile
+          </a>
+          <a href="../contact.html" class="btn btn-outline" style="padding:9px 18px;font-size:13px;">Contact FMC →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advisor-body">
+  <div class="container">
+    <div class="advisor-body-grid">
+      <div class="advisor-bio">
+        <h2>About Dr. Rutger Wijburg</h2>
+        <p>Dr. Rutger Wijburg serves as a Semiconductor Advisor to Ferroelectric Memory Company, bringing deep expertise in semiconductor manufacturing and industry operations to FMC's strategic advisory network.</p>
+        <p>With an extensive background in Ex COO at Infineon Technologies, Dr. Rutger Wijburg provides FMC with critical guidance on technology development, manufacturing partnerships, and industry positioning as the company scales its DRAM+ and CACHE+ persistent memory platforms.</p>
+        <p style="color:var(--text-muted);font-size:13px;font-style:italic;padding:16px;background:var(--bg-off-white);border-left:3px solid var(--green-primary);border-radius:0 6px 6px 0;">
+          This profile is a placeholder. Please add a full biography and any approved professional details for Dr. Rutger Wijburg.
+        </p>
+      </div>
+      <div>
+        <div class="advisor-sidebar-card">
+          <h4>Advisory Focus</h4>
+          <p>Semiconductor Advisor — providing strategic guidance to FMC on semiconductor technology, manufacturing, and industry partnerships.</p>
+        </div>
+        <div class="advisor-sidebar-card">
+          <h4>Background</h4>
+          <p>Ex COO at Infineon Technologies</p>
+        </div>
+        <div class="advisor-sidebar-card">
+          <h4>Connect</h4>
+          <!-- LINKEDIN: Replace href below with Dr. Rutger Wijburg's LinkedIn URL -->
+          <a href="https://www.linkedin.com/in/RUTGER-WIJBURG-LINKEDIN-URL" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#0077b5;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div style="padding:28px 0;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;justify-content:space-between;">
+      <a href="../index.html" class="logo"><img src="../img/fmc-logo-white.png" alt="FMC" height="30"></a>
+      <div style="display:flex;gap:20px;">
+        <a href="../about.html" style="font-size:13px;color:var(--text-white-50);transition:color 0.15s;" onmouseover="this.style.color='var(--green-primary)'" onmouseout="this.style.color='var(--text-white-50)'">About FMC</a>
+        <a href="../contact.html" style="font-size:13px;color:var(--text-white-50);transition:color 0.15s;" onmouseover="this.style.color='var(--green-primary)'" onmouseout="this.style.color='var(--text-white-50)'">Contact</a>
+        <a href="../careers.html" style="font-size:13px;color:var(--text-white-50);transition:color 0.15s;" onmouseover="this.style.color='var(--green-primary)'" onmouseout="this.style.color='var(--text-white-50)'">Careers</a>
+      </div>
+    </div>
+    <div style="padding:18px 0;display:flex;align-items:center;justify-content:space-between;">
+      <p style="font-size:12px;color:var(--text-white-50);">© 2025 Ferroelectric Memory Company. All rights reserved.</p>
+      <a href="../about.html#advisors" style="font-size:12px;color:var(--text-white-50);">← Back to all advisors</a>
+    </div>
+  </div>
+</footer>
+<script>
+  window.addEventListener('scroll', () => { document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 40); });
+</script>
+</body>
+</html>

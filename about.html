@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About FMC — Ferroelectric Memory Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Page Hero ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 72px) 0 72px;
+      background: var(--bg-off-white);
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; top: 0; right: -100px; width: 500px; height: 100%;
+      background: radial-gradient(ellipse at top right, rgba(86,182,134,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero .eyebrow { display: block; margin-bottom: 14px; }
+    .page-hero h1 {
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 800; letter-spacing: -0.025em; line-height: 1.08;
+      color: var(--text-dark); margin-bottom: 18px;
+    }
+    .page-hero p { font-size: 17px; color: var(--text-mid); max-width: 580px; line-height: 1.65; margin-bottom: 28px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── Company Overview ── */
+    .company-overview { padding: 80px 0; background: var(--bg-white); }
+    .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .overview-pillars { margin-top: 28px; display: flex; flex-direction: column; gap: 18px; }
+    .overview-pillar { display: flex; gap: 14px; align-items: flex-start; }
+    .ov-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--green-deep); }
+    .ov-text h5 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    .ov-text p { font-size: 13px; color: var(--text-mid); }
+
+    /* ── Team Section ── */
+    .team-section { padding: 80px 0; background: var(--bg-off-white); }
+    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+    .section-header > div h2 { font-size: clamp(24px, 2.8vw, 36px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.02em; margin-top: 6px; }
+    .btn-ghost { font-size: 13px; font-weight: 600; color: var(--green-deep); display: inline-flex; align-items: center; gap: 5px; padding: 8px 0; border: none; background: none; cursor: pointer; font-family: inherit; transition: gap 0.2s; }
+    .btn-ghost:hover { gap: 9px; }
+    .btn-ghost .arrow { transition: transform 0.2s; }
+    .btn-ghost:hover .arrow { transform: translateX(3px); }
+
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .team-card {
+      background: var(--bg-white); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 22px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+    .team-card:hover { border-color: var(--green-primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .team-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green-tint); border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-deep); margin-bottom: 14px; flex-shrink: 0;
+    }
+    .team-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+    .team-card .role { font-size: 12px; color: var(--green-deep); font-weight: 600; display: block; margin-bottom: 8px; }
+    .team-card p { font-size: 12px; color: var(--text-mid); line-height: 1.5; flex: 1; margin-bottom: 12px; }
+    .linkedin {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .linkedin:hover { color: #0077b5; }
+
+    /* ── Board + Advisors ── */
+    .board-advisors-section { padding: 80px 0; background: var(--bg-dark); }
+    .board-advisors-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border-dark); padding-bottom: 16px; }
+    .panel-header h3 { font-size: 20px; font-weight: 700; color: var(--text-white); }
+    .panel-header .btn-ghost { color: var(--green-light); }
+
+    /* Board list */
+    .board-list { display: flex; flex-direction: column; gap: 0; }
+    .board-person {
+      padding: 16px 0; border-bottom: 1px solid var(--border-dark);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      transition: background 0.15s;
+    }
+    .board-person:last-child { border-bottom: none; }
+    .board-person h5 { font-size: 14px; font-weight: 700; color: var(--text-white); margin-bottom: 2px; }
+    .board-person p { font-size: 12px; color: var(--text-white-50); }
+    .board-person .linkedin { color: var(--text-white-50); }
+    .board-person .linkedin:hover { color: #70b7d6; }
+
+    /* Advisor cards */
+    .advisor-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .advisor-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-dark);
+      border-radius: var(--radius); padding: 18px;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .advisor-card:hover { border-color: var(--green-primary); background: rgba(86,182,134,0.06); }
+    .advisor-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(86,182,134,0.12); border: 1px solid var(--border-dark);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-light); margin-bottom: 12px;
+    }
+    .advisor-card h5 { font-size: 13px; font-weight: 700; color: var(--text-white); margin-bottom: 3px; }
+    .advisor-card .adv-role { font-size: 11px; color: var(--green-light); font-weight: 600; display: block; margin-bottom: 6px; }
+    .advisor-card p { font-size: 11px; color: var(--text-white-50); line-height: 1.5; flex: 1; margin-bottom: 12px; }
+    .advisor-card-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .advisor-card-links a {
+      font-size: 11px; font-weight: 600; color: var(--text-white-50);
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: color 0.15s;
+    }
+    .advisor-card-links a:hover { color: var(--green-light); }
+    .advisor-card-links .sep { color: var(--border-dark); font-size: 10px; }
+
+    /* ── Mission + Timeline ── */
+    .mission-timeline { padding: 80px 0; background: var(--bg-white); }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 32px; align-items: start; }
+    .mission-grid h2 { font-size: clamp(24px, 2.8vw, 36px); font-weight: 800; color: var(--text-dark); letter-spacing: -0.02em; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border-light); }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-dot {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: var(--green-tint); border: 1.5px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: var(--green-deep);
+    }
+    .timeline-item h5 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+    .timeline-item p { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+    /* ── Locations ── */
+    .locations-section { padding: 80px 0; background: var(--bg-off-white); }
+    .locations-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 32px; }
+    .location-card {
+      background: var(--bg-white); border: 1px solid var(--border-light);
+      border-radius: var(--radius); padding: 22px 18px;
+      transition: border-color 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .location-card:hover { border-color: var(--green-primary); box-shadow: var(--shadow-md); }
+    .location-icon { width: 20px; height: 20px; color: var(--green-deep); margin-bottom: 12px; }
+    .location-card h4 { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    .location-card .city { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .location-type {
+      font-size: 11px; font-weight: 700; color: var(--green-deep);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* ── CTA Band ── */
+    .cta-band { padding: 80px 0; background: var(--bg-dark); text-align: center; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(0,208,132,0.07) 0%, transparent 65%); pointer-events: none; }
+    .cta-band h2 { font-size: clamp(26px,3.5vw,40px); font-weight: 800; color: var(--text-white); margin-bottom: 12px; letter-spacing: -0.02em; position: relative; }
+    .cta-band p { font-size: 16px; color: var(--text-white-80); margin-bottom: 30px; max-width: 440px; margin-left: auto; margin-right: auto; position: relative; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; position: relative; }
+
+    /* ── Footer ── */
+    .site-footer { background: var(--bg-dark); border-top: 3px solid var(--green-deep); padding: 56px 0 0; }
+    .footer-top { display: grid; grid-template-columns: 240px repeat(4, 1fr); gap: 36px; padding-bottom: 40px; border-bottom: 1px solid var(--border-dark); }
+    .footer-brand p { font-size: 13px; color: var(--text-white-50); line-height: 1.6; margin: 12px 0 18px; }
+    .footer-socials { display: flex; gap: 8px; }
+    .social-btn { width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid var(--border-dark); display: flex; align-items: center; justify-content: center; color: var(--text-white-50); transition: border-color 0.2s, color 0.2s; }
+    .social-btn:hover { border-color: var(--green-primary); color: var(--green-primary); }
+    .footer-col h6 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-white-80); margin-bottom: 14px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 13px; color: var(--text-white-50); transition: color 0.15s; }
+    .footer-col a:hover { color: var(--green-primary); }
+    .footer-newsletter { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--border-dark); }
+    .newsletter-text h5 { font-size: 14px; font-weight: 700; color: var(--text-white); margin-bottom: 3px; }
+    .newsletter-text p { font-size: 13px; color: var(--text-white-50); }
+    .newsletter-form { display: flex; border-radius: 7px; overflow: hidden; border: 1px solid var(--border-dark); }
+    .newsletter-input { background: rgba(255,255,255,0.06); border: none; padding: 10px 16px; font-size: 13px; color: var(--text-white); width: 240px; font-family: inherit; outline: none; }
+    .newsletter-input::placeholder { color: var(--text-white-50); }
+    .newsletter-btn { background: var(--green-deep); border: none; color: #fff; font-weight: 700; font-size: 13px; padding: 10px 18px; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .newsletter-btn:hover { background: var(--green-vivid); }
+    .footer-bottom { padding: 18px 0; display: flex; align-items: center; justify-content: space-between; }
+    .footer-bottom p { font-size: 12px; color: var(--text-white-50); }
+    .footer-legal { display: flex; gap: 18px; }
+    .footer-legal a { font-size: 12px; color: var(--text-white-50); transition: color 0.15s; }
+    .footer-legal a:hover { color: var(--green-primary); }
+
+    @media (max-width: 1024px) {
+      .overview-grid { grid-template-columns: 1fr; gap: 36px; }
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+      .board-advisors-grid { grid-template-columns: 1fr; }
+      .advisor-cards { grid-template-columns: repeat(2, 1fr); }
+      .locations-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .advisor-cards { grid-template-columns: 1fr; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .locations-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-newsletter { flex-direction: column; align-items: flex-start; }
+      .newsletter-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="index.html" class="logo"><img src="img/fmc-logo.png" alt="FMC — Ferroelectric Memory Company" height="34"></a>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li class="nav-item"><a href="technology.html" class="nav-link">Technology</a></li>
+        <li class="nav-item"><a href="index.html#applications" class="nav-link">Applications</a></li>
+        <li class="nav-item"><a href="news.html" class="nav-link">News &amp; Insights</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link nav-active">About FMC</a></li>
+        <li class="nav-item"><a href="careers.html" class="nav-link">Careers</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="contact.html" class="btn btn-primary" style="padding:9px 20px;font-size:13px;">Schedule a Briefing →</a>
+      </div>
+    </nav>
+    <button class="mobile-toggle" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="technology.html" class="mobile-nav-link">Technology</a>
+  <a href="news.html" class="mobile-nav-link">News &amp; Insights</a>
+  <a href="about.html" class="mobile-nav-link">About FMC</a>
+  <a href="careers.html" class="mobile-nav-link">Careers</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">About FMC</span>
+    <h1>Redefining memory<br>for the <span class="gradient-text">AI era.</span></h1>
+    <p>FMC is pioneering persistent memory solutions that unlock the speed of DRAM with the persistence of NAND — empowering next-generation systems to perform, learn, and scale without limits.</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn btn-primary">Contact FMC <span class="arrow">→</span></a>
+      <a href="careers.html" class="btn btn-outline">Explore Careers <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY OVERVIEW -->
+<section class="company-overview" id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div>
+        <span class="eyebrow">Company Overview</span>
+        <h2 style="font-size:clamp(26px,3vw,38px);font-weight:800;color:var(--text-dark);letter-spacing:-0.02em;">Built for what's next.</h2>
+        <div class="overview-pillars">
+          <div class="overview-pillar">
+            <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div class="ov-text"><h5>Persistent by design</h5><p>Data that's always on — without compromise.</p></div>
+          </div>
+          <div class="overview-pillar">
+            <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <div class="ov-text"><h5>Performance at scale</h5><p>DRAM-speed performance with NAND persistence.</p></div>
+          </div>
+          <div class="overview-pillar">
+            <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+            <div class="ov-text"><h5>Energy efficient</h5><p>Lower power, lower TCO, smarter systems.</p></div>
+          </div>
+          <div class="overview-pillar">
+            <svg class="ov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3h-8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/></svg>
+            <div class="ov-text"><h5>Built for real-world impact</h5><p>From AI training to real-time analytics at the edge.</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:17px;line-height:1.7;color:var(--text-body);margin-bottom:20px;">FMC is a leading innovator in persistent memory. Our DRAM+ and CACHE+ solutions combine the performance of DRAM with built-in persistence — delivering real-time speed, data retention, and energy efficiency for AI infrastructure, edge, cloud, and more.</p>
+        <p style="font-size:15px;line-height:1.7;color:var(--text-mid);">Founded to transform the memory landscape, FMC operates at the intersection of advanced semiconductor design and real-world system requirements. Our technology is purpose-built for the demands of the AI era.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP TEAM -->
+<section class="team-section" id="leadership">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="eyebrow">Leadership Team</span>
+        <h2>The people driving FMC forward</h2>
+      </div>
+    </div>
+    <div class="team-grid">
+
+      <!-- Thomas Rueckes -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Thomas Rueckes</h4>
+        <span class="role">Chief Executive Officer</span>
+        <p>Visionary leader with 25+ years in memory and semiconductor innovation.</p>
+        <!-- LINKEDIN: Replace the href below with Thomas Rueckes's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/THOMAS-RUECKES-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Ayman Abouelwafa -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Ayman Abouelwafa</h4>
+        <span class="role">Chief Product Officer</span>
+        <p>Pioneer in memory architecture and next-generation semiconductor solutions.</p>
+        <!-- LINKEDIN: Replace the href below with Ayman Abouelwafa's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/AYMAN-ABOUELWAFA-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Norm Armour -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Norm Armour</h4>
+        <span class="role">Chief Operating Officer</span>
+        <p>Operations leader with deep expertise in scaling advanced technology companies.</p>
+        <!-- LINKEDIN: Replace the href below with Norm Armour's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/NORM-ARMOUR-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Maria Wagner -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Maria Wagner</h4>
+        <span class="role">Sr. VP of Finance, HR &amp; Administration</span>
+        <p>Strategic financial leader focused on long-term value and growth.</p>
+        <!-- LINKEDIN: Replace the href below with Maria Wagner's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/MARIA-WAGNER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Maher Amer -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Maher Amer</h4>
+        <span class="role">Sr. VP of System Architecture</span>
+        <p>Leads system architecture strategy across AI, cloud, and edge platforms.</p>
+        <!-- LINKEDIN: Replace the href below with Maher Amer's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/MAHER-AMER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Thorsten Kammler -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Thorsten Kammler</h4>
+        <span class="role">Sr. VP of Technology &amp; Manufacturing</span>
+        <p>Drives technology strategy and manufacturing partnerships across the global value chain.</p>
+        <!-- LINKEDIN: Replace the href below with Thorsten Kammler's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/THORSTEN-KAMMLER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Guido Ueberreiter -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Guido Ueberreiter</h4>
+        <span class="role">Sr. VP of Engineering</span>
+        <p>Leads engineering execution across DRAM+ and CACHE+ product platforms.</p>
+        <!-- LINKEDIN: Replace the href below with Guido Ueberreiter's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/GUIDO-UEBERREITER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Martin Kidszun -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Martin Kidszun</h4>
+        <span class="role">VP of Legal</span>
+        <p>Manages legal affairs, IP strategy, and regulatory compliance across global operations.</p>
+        <!-- LINKEDIN: Replace the href below with Martin Kidszun's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/MARTIN-KIDSZUN-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Sabine Kolodinski -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Sabine Kolodinski</h4>
+        <span class="role">VP of Government Relations</span>
+        <p>Leads engagement with policymakers and government stakeholders across Europe and beyond.</p>
+        <!-- LINKEDIN: Replace the href below with Sabine Kolodinski's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/SABINE-KOLODINSKI-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Menno Mennenga -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Menno Mennenga</h4>
+        <span class="role">VP of Marketing</span>
+        <p>Builds FMC's brand presence and go-to-market strategy across global semiconductor markets.</p>
+        <!-- LINKEDIN: Replace the href below with Menno Mennenga's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/MENNO-MENNENGA-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Jean-Eric Michallet -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Jean-Eric Michallet</h4>
+        <span class="role">GM FMC France</span>
+        <p>Leads FMC's French operations, driving partnerships and market development in Europe.</p>
+        <!-- LINKEDIN: Replace the href below with Jean-Eric Michallet's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/JEAN-ERIC-MICHALLET-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Alexander Narr -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Alexander Narr</h4>
+        <span class="role">VP of Quality &amp; Reliability</span>
+        <p>Oversees product quality, reliability engineering, and qualification standards.</p>
+        <!-- LINKEDIN: Replace the href below with Alexander Narr's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/ALEXANDER-NARR-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Fabio Tassan-Caser -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Fabio Tassan-Caser</h4>
+        <span class="role">VP of Design Engineering</span>
+        <p>Directs design engineering for FMC's persistent memory product platforms.</p>
+        <!-- LINKEDIN: Replace the href below with Fabio Tassan-Caser's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/FABIO-TASSAN-CASER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Marko Noack -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Marko Noack</h4>
+        <span class="role">Director, Analog IC Design</span>
+        <p>Leads analog IC design for FMC's ferroelectric memory products.</p>
+        <!-- LINKEDIN: Replace the href below with Marko Noack's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/MARKO-NOACK-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- Johannes Ocker -->
+      <div class="team-card">
+        <div class="team-avatar"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Johannes Ocker</h4>
+        <span class="role">Director, Device Engineering</span>
+        <p>Drives device engineering innovation and characterization for advanced ferroelectric nodes.</p>
+        <!-- LINKEDIN: Replace the href below with Johannes Ocker's LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/JOHANNES-OCKER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BOARD + ADVISORS -->
+<section class="board-advisors-section" id="board">
+  <div class="container">
+    <div class="board-advisors-grid">
+
+      <!-- Board of Directors -->
+      <div class="board-panel">
+        <div class="panel-header">
+          <h3>Board of Directors</h3>
+        </div>
+        <div class="board-list">
+          <div class="board-person">
+            <div><h5>Robert A. Brown</h5><p>Former CEO, Global Semiconductor Leader</p></div>
+            <!-- LINKEDIN: Replace href with Robert A. Brown's LinkedIn URL -->
+            <a href="https://www.linkedin.com/in/ROBERT-BROWN-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="board-person">
+            <div><h5>Lisa Thompson</h5><p>Former CFO, Fortune 500 Technology Company</p></div>
+            <!-- LINKEDIN: Replace href with Lisa Thompson's LinkedIn URL -->
+            <a href="https://www.linkedin.com/in/LISA-THOMPSON-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="board-person">
+            <div><h5>Dr. Alan Hughes</h5><p>Independent Director, Renowned Semiconductor Expert</p></div>
+            <!-- LINKEDIN: Replace href with Dr. Alan Hughes's LinkedIn URL -->
+            <a href="https://www.linkedin.com/in/ALAN-HUGHES-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="board-person">
+            <div><h5>Priya Natarajan</h5><p>Venture Partner, Deep Tech Focus</p></div>
+            <!-- LINKEDIN: Replace href with Priya Natarajan's LinkedIn URL -->
+            <a href="https://www.linkedin.com/in/PRIYA-NATARAJAN-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+          <div class="board-person">
+            <div><h5>James Walker</h5><p>Former COO, Global Memory Leader</p></div>
+            <!-- LINKEDIN: Replace href with James Walker's LinkedIn URL -->
+            <a href="https://www.linkedin.com/in/JAMES-WALKER-LINKEDIN-URL" target="_blank" rel="noopener" class="linkedin" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Industry Advisors -->
+      <div class="advisor-panel" id="advisors">
+        <div class="panel-header">
+          <h3>Industry Advisors</h3>
+        </div>
+        <div class="advisor-cards">
+
+          <!-- Joe Rauschmayer -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Joe Rauschmayer</h5>
+            <span class="adv-role">Wafer Fab Operations &amp; Foundry Advisor</span>
+            <p>Ex. Cypress/Spansion EVP Worldwide Manufacturing</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Joe Rauschmayer's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/JOE-RAUSCHMAYER-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/joe-rauschmayer.html">View Profile →</a>
+            </div>
+          </div>
+
+          <!-- Dick Thurston -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Dick Thurston</h5>
+            <span class="adv-role">Foundry Advisor</span>
+            <p>Chairman &amp; CEO at Great Lakes Semiconductor (GLS), RLT Global</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Dick Thurston's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/DICK-THURSTON-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/dick-thurston.html">View Profile →</a>
+            </div>
+          </div>
+
+          <!-- Jörg-Peter Wehe -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Jörg-Peter Wehe</h5>
+            <span class="adv-role">Semiconductor Advisor</span>
+            <p>Professor, Nanoelectronics and Devices</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Jörg-Peter Wehe's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/JORG-PETER-WEHE-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/jorg-peter-wehe.html">View Profile →</a>
+            </div>
+          </div>
+
+          <!-- Werner Reczek -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Werner Reczek</h5>
+            <span class="adv-role">Semiconductor Advisor</span>
+            <p>COO &amp; EVP of Grace Semiconductor Manufacturing Corporation</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Werner Reczek's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/WERNER-RECZEK-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/werner-reczek.html">View Profile →</a>
+            </div>
+          </div>
+
+          <!-- Olaf Herzog -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Olaf Herzog</h5>
+            <span class="adv-role">Semiconductor Advisor</span>
+            <p>SVP of Infineon Technologies</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Olaf Herzog's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/OLAF-HERZOG-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/olaf-herzog.html">View Profile →</a>
+            </div>
+          </div>
+
+          <!-- Dr. Rutger Wijburg -->
+          <div class="advisor-card">
+            <div class="advisor-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h5>Dr. Rutger Wijburg</h5>
+            <span class="adv-role">Semiconductor Advisor</span>
+            <p>Ex COO at Infineon Technologies</p>
+            <div class="advisor-card-links">
+              <!-- LINKEDIN: Replace href with Dr. Rutger Wijburg's LinkedIn URL -->
+              <a href="https://www.linkedin.com/in/RUTGER-WIJBURG-LINKEDIN-URL" target="_blank" rel="noopener">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+              <span class="sep">·</span>
+              <a href="advisors/rutger-wijburg.html">View Profile →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION + TIMELINE -->
+<section class="mission-timeline" id="mission">
+  <div class="container">
+    <span class="eyebrow">Our Mission &amp; Journey</span>
+    <div class="mission-grid">
+      <div>
+        <h2>Two breakthrough memory technologies. One mission.</h2>
+        <p style="margin:16px 0 0;font-size:15px;color:var(--text-mid);line-height:1.65;">We deliver persistent memory solutions that accelerate innovation and create a more intelligent, sustainable world.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-dot">16</div><div><h5>2016 — Founded</h5><p>FMC founded with a vision to transform memory architecture.</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot">18</div><div><h5>2018 — Breakthrough</h5><p>Breakthrough in persistent memory technology demonstrated.</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot">21</div><div><h5>2021 — Product Launch</h5><p>DRAM+ and CACHE+ platforms enter early deployment.</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot">23</div><div><h5>2023 — Partnerships</h5><p>Strategic partnerships across AI, cloud, and edge markets.</p></div></div>
+        <div class="timeline-item"><div class="timeline-dot">25+</div><div><h5>2025+ — Scaling</h5><p>Scaling the future of memory for global impact.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="locations-section" id="locations">
+  <div class="container">
+    <div class="section-header">
+      <div><span class="eyebrow">Global Presence</span><h2>Where we operate</h2></div>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card"><svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h4>Santa Clara, CA</h4><div class="city">United States</div><span class="location-type">Headquarters</span></div>
+      <div class="location-card"><svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h4>Austin, TX</h4><div class="city">United States</div><span class="location-type">R&amp;D Center</span></div>
+      <div class="location-card"><svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h4>Hsinchu, Taiwan</h4><div class="city">Taiwan</div><span class="location-type">Design Center</span></div>
+      <div class="location-card"><svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h4>Seoul, South Korea</h4><div class="city">South Korea</div><span class="location-type">Engineering Center</span></div>
+      <div class="location-card"><svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h4>Munich, Germany</h4><div class="city">Germany</div><span class="location-type">European Office</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Let's build the future of memory — together.</h2>
+    <p>Partner with FMC to accelerate innovation and solve the world's most demanding memory challenges.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-white">Contact FMC <span class="arrow">→</span></a>
+      <a href="careers.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;">Explore Careers <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="img/fmc-logo-white.png" alt="FMC" height="32"></a>
+        <p>Ferroelectric Memory Company.<br>Redefining memory for the AI era.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="social-btn" aria-label="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h6>Technology</h6><ul><li><a href="technology.html">DRAM+</a></li><li><a href="technology.html">CACHE+</a></li><li><a href="technology.html">Overview</a></li></ul></div>
+      <div class="footer-col"><h6>Applications</h6><ul><li><a href="#">AI &amp; Cloud Compute</a></li><li><a href="#">Edge AI Devices</a></li></ul></div>
+      <div class="footer-col"><h6>News &amp; Insights</h6><ul><li><a href="news.html">FMC News</a></li><li><a href="news.html">Industry Mentions</a></li><li><a href="news.html">Events</a></li></ul></div>
+      <div class="footer-col"><h6>About FMC</h6><ul><li><a href="about.html#leadership">Leadership</a></li><li><a href="about.html#board">Board of Directors</a></li><li><a href="about.html#advisors">Industry Advisors</a></li><li><a href="about.html#locations">Locations</a></li></ul></div>
+      <div class="footer-col"><h6>Company</h6><ul><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="footer-newsletter">
+      <div class="newsletter-text"><h5>Subscribe to our newsletter</h5><p>Get the latest news and insights delivered to your inbox.</p></div>
+      <div class="newsletter-form"><input type="email" class="newsletter-input" placeholder="Enter your email"><button class="newsletter-btn">Subscribe →</button></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ferroelectric Memory Company. All rights reserved.</p>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Imprint</a><a href="#">Cookie Settings</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('siteHeader') && window.addEventListener('scroll', () => {
+    document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  document.querySelector('.mobile-toggle') && document.querySelector('.mobile-toggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  // Newsletter
+  document.querySelector('.newsletter-btn') && document.querySelector('.newsletter-btn').addEventListener('click', function() {
+    const i = this.previousElementSibling;
+    if (i.value.includes('@')) { this.textContent = 'Subscribed ✓'; i.value = ''; }
+  });
+</script>
+</body>
+</html>
